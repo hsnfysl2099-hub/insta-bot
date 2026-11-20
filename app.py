@@ -17,7 +17,6 @@ def home():
 
 @app.route("/webhook", methods=["GET", "POST"])
 def webhook():
-    # التحقق من الربط مع Meta
     if request.method == "GET":
         mode = request.args.get("hub.mode")
         token = request.args.get("hub.verify_token")
@@ -26,7 +25,6 @@ def webhook():
             return challenge, 200
         return "Verification failed", 403
 
-    # استقبال الرسائل والرد عليها
     if request.method == "POST":
         data = request.get_json(silent=True) or {}
         print("Incoming webhook POST:", data, flush=True)
